@@ -39,7 +39,8 @@ publish() {
     ptangle $1 >> /dev/stderr
     echo -e "Tangled!\n" >> /dev/stderr
     echo -e "Packaging..." >> /dev/stderr
-    tar czvf "$name.tar.gz" "$1" "$name.py" "$name.pdf" "$name.tex" >> /dev/stderr
+    echo -e "Files added:\n$1\n$name.py\n$name.pdf\n$name.tex\n\nGenerated with pweave, pandoc, https://github.com/DhruvaSambrani/411maker and love" >> $name-filelist.txt
+    tar czvf "$name.tar.gz" "$1" "$name.py" "$name.pdf" "$name.tex" "$name-filelist.txt" >> /dev/stderr
     echo "COMPLETE! tar.gz created at " >> /dev/stderr
     echo "$name.tar.gz"
 }
@@ -50,6 +51,7 @@ help() {
     echo "Commands:"
     echo -e "  new \`labno\`: \t\t\t make files for new lab"
     echo -e "  compile path_to_content: \t compile to pdf"
+    echo -e "  publish path_to_content: \t make a .tar.gz file"
 }
 
 case "${1}" in
